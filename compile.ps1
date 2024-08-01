@@ -26,7 +26,7 @@ $script_content.Add($header)
 $script_content.Add("")
 
 Update-Progress "Adding: Version" 10
-$start_content = Get-Content .\scripts\start.ps1
+$start_content = Get-Content .\scripts\start.ps1 -Raw
 $start_content = $start_content.replace('#{replaceme}', "$(Get-Date -Format yy.MM.dd)")
 $script_content.Add($start_content)
 $script_content.Add("")
