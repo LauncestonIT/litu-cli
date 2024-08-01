@@ -1,0 +1,27 @@
+Function Show-Logo {
+    <#
+
+    .SYNOPSIS
+        Prints the logo
+    #>
+
+
+    Write-Host "   ,--,                     ,----,                "
+    Write-Host ",---.'|                   ,/   .`|                "
+    Write-Host "|   | :       ,---,     ,`   .'  :                "
+    Write-Host ":   : |    ,`--.' |   ;    ;     /          ,--,  "
+    Write-Host "|   ' :    |   :  : .'___,/    ,'         ,'_ /|  "
+    Write-Host ";   ; '    :   |  ' |    :     |     .--. |  | :  "
+    Write-Host "'   | |__  |   :  | ;    |.';  ;   ,'_ /| :  . |  "
+    Write-Host "|   | :.'| '   '  ; `----'  |  |   |  ' | |  . .  "
+    Write-Host "'   :    ; |   |  |     '   :  ;   |  | ' |  | |  "
+    Write-Host "|   |  ./  '   :  ;     |   |  '   :  | | :  ' ;  "
+    Write-Host ";   : ;    |   |  '     '   :  |   |  ; ' |  | '  "
+    Write-Host "|   ,/     '   :  |     ;   |.'    :  | : ;  ; |  "
+    Write-Host "'---'      ;   |.'      '---'      '  :  `--'   \ "
+    Write-Host "           '---'                   :  ,      .-./ "
+    Write-Host "                                    `--`----'     "
+    Write-Host ""
+    Write-Host "======Launceston IT======"
+    Write-Host "=====Windows Utility====="
+}
