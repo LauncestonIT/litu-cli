@@ -176,11 +176,6 @@ function Send-ComputerInfoToHudu {
         # Endpoint to create an asset in Hudu
         $endpoint = "$baseURL/companies/$clientID/assets"
     
-        # Headers for the API request
-        $headers = @{
-            "x-api-key" = "$apiKey"
-        }
-    
         # Body of the request
         $body = @{
             asset = @{
