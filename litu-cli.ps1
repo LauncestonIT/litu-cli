@@ -291,11 +291,6 @@ function Send-ComputerInfoToHudu {
         # Endpoint to create an asset in Hudu
         $endpoint = "$baseURL/companies/$clientID/assets"
     
-        # Headers for the API request
-        $headers = @{
-            "x-api-key" = "$apiKey"
-        }
-    
         # Body of the request
         $body = @{
             asset = @{
@@ -456,7 +451,7 @@ function Show-ConfigMenu {
 
 function Show-InstallMenu {
     Write-Host "Please select an option:"
-    Write-Host "0) Main Menu"
+    Write-Host "0) Return to Main Menu"
     Write-Host "1) Comet"
     Write-Host "2) Sophos ( or silent install exe)"
     Write-Host "Enter a number (0-2):"
