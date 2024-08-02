@@ -525,6 +525,7 @@ function Show-ConfigMenu {
 }
 
 function Show-InstallMenu {
+    Clear-Host
     Write-Host "Please select an option:"
     Write-Host "0) Return to Main Menu"
     Write-Host "1) Comet"
