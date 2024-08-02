@@ -161,7 +161,8 @@ function Send-ComputerInfoToHudu {
     }
     
     function Get-Notes {
-        $notes = Read-Host "Enter any notes"
+        Write-Host "Enter any notes"
+        $notes = Read-Host 
         return "$notes"
     }
     
@@ -317,12 +318,15 @@ function Send-ComputerInfoToHudu {
     $data | Format-List -Property Hostname, Brand, Model, IPAddressEthernet, MACAddressEthernet, IPAddressWiFi, MACAddressWiFi, CPU, Memory, Drive, Location, OperatingSystem, Notes
 
     # Prompt the user for confirmation
-    $response = Read-Host "Do you want to send this data to Hudu? (yes/no)"
+    Write-Host "Do you want to send this data to Hudu? (yes/no)"
+    $response = Read-Host 
 
     if ($response -eq "yes") {
         # Prompt the user for input and store the values in variables
-        $apiKey = Read-Host "Please enter your API Key"
-        $clientURL = Read-Host "Please enter the Client URL"
+        Write-Host "Please enter your API Key"
+        $apiKey = Read-Host 
+        Write-Host "Please enter the Client URL"
+        $clientURL = Read-Host 
 
         # Check if API Key is empty
         if ([string]::IsNullOrWhiteSpace($apiKey)) {
