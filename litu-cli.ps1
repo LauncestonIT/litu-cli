@@ -468,8 +468,6 @@ function Send-ComputerInfoToHudu {
     }
 }
 
-Send-ComputerInfoToHudu
-
 
 function Set-Hostname {
     # Prompt the user for the new hostname

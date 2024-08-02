@@ -352,5 +352,3 @@ function Send-ComputerInfoToHudu {
         Write-Host "Operation canceled."
     }
 }
-
-Send-ComputerInfoToHudu
