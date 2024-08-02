@@ -17,6 +17,7 @@ function Show-MainMenu {
             Show-ConfigMenu
         }
         3 {
+            Write-host "Debug message"
             Send-ComputerInfoToHudu
         }
         default {
