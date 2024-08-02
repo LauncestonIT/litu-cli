@@ -118,6 +118,24 @@ function Send-ComputerInfoToHudu {
     $apiKey = Read-Host "Please enter your API Key"
     $clientURL = Read-Host "Please enter the Client URL"
     
+    # Check if API Key is empty
+    if ([string]::IsNullOrWhiteSpace($apiKey)) {
+        Write-Error "API Key cannot be empty. Please provide a valid API Key."
+        return
+    }
+    
+    # Check if Client URL is empty
+    if ([string]::IsNullOrWhiteSpace($clientURL)) {
+        Write-Error "Client URL cannot be empty. Please provide a valid Client URL."
+        return
+    }
+    
+    # Validate Client URL format
+    if ($clientURL -notmatch '^https?://') {
+        Write-Error "Invalid Client URL format. Please provide a URL starting with http:// or https://."
+        return
+    }
+    
     $HuduURL = $clientURL -replace '/c/.*', '' 
     $URLslug = $clientURL -replace '.*c/', ''
     
@@ -523,6 +541,7 @@ function Show-MainMenu {
             Show-ConfigMenu
         }
         3 {
+            Write-host "Debug message"
             Send-ComputerInfoToHudu
         }
         default {
