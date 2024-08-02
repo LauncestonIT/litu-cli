@@ -114,33 +114,12 @@ function Deploy-Sophos {
 
 
 function Send-ComputerInfoToHudu {
-    # Prompt the user for input and store the values in variables
-    $apiKey = Read-Host "Please enter your API Key"
-    $clientURL = Read-Host "Please enter the Client URL"
-    
-    # Check if API Key is empty
-    if ([string]::IsNullOrWhiteSpace($apiKey)) {
-        Write-Error "API Key cannot be empty. Please provide a valid API Key."
-        return
-    }
-    
-    # Check if Client URL is empty
-    if ([string]::IsNullOrWhiteSpace($clientURL)) {
-        Write-Error "Client URL cannot be empty. Please provide a valid Client URL."
-        return
-    }
-    
-    # Validate Client URL format
-    if ($clientURL -notmatch '^https?://') {
-        Write-Error "Invalid Client URL format. Please provide a URL starting with http:// or https://."
-        return
-    }
-    
-    $HuduURL = $clientURL -replace '/c/.*', '' 
-    $URLslug = $clientURL -replace '.*c/', ''
-    
-    $baseURL = "$HuduURL/api/v1"
-    
+    # Display a progress bar while collecting computer information
+    $progressPercentage = 0
+    $incrementStep = 8.3
+
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+
     function Get-ClientId {
         # Define the API endpoint with the encoded client name
         $endpoint = "$baseURL/companies?slug=$URLslug"
@@ -163,7 +142,6 @@ function Send-ComputerInfoToHudu {
     
     function Get-Hostname {
         return $env:computername
-    
     }
     
     function Get-Brand {
@@ -243,11 +221,11 @@ function Send-ComputerInfoToHudu {
                 return ($ipAddressDetails | Where-Object { $_.InterfaceIndex -eq $primaryAdapter.ifIndex }).IPAddress -join ', '
             } else {
                 Write-Host "No IP address found for Ethernet adapter."
-                
+                return ""
             }
         } else {
             Write-Host "No primary Ethernet adapter found."
-            
+            return ""
         }
     }
     
@@ -257,7 +235,7 @@ function Send-ComputerInfoToHudu {
             return $primaryAdapter.MacAddress -replace '-', ':'
         } else {
             Write-Host "No primary adapter found."
-            
+            return ""
         }
     }
     
@@ -376,41 +354,122 @@ function Send-ComputerInfoToHudu {
         }
     }
     
+    # Increment progress bar and collect computer information
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $hostname = Get-Hostname
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $brand = Get-Brand
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $model = Get-Model
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $ipAddressEthernet = Get-IPAddressEthernet
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $macAddressEthernet = Get-MACAddressEthernet
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $ipAddressWiFi = Get-IPAddressWiFi
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $macAddressWiFi = Get-MACAddressWiFi
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $cpu = Get-CPU
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $memory = Get-Memory
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $drive = Get-Drive
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $os = Get-OperatingSystem
+    
+    $progressPercentage += $incrementStep
+    Write-Progress -Activity "Collecting Computer Information" -Status "$progressPercentage% Complete" -PercentComplete $progressPercentage
+    $notes = Get-Notes
+    
     # Create a PowerShell object with the properties
     $pcInfo = [PSCustomObject]@{
-        Hostname = Get-Hostname
-        Brand = Get-Brand
-        Model = Get-Model
-        IPAddressEthernet = Get-IPAddressEthernet
-        MACAddressEthernet = Get-MACAddressEthernet
-        IPAddressWiFi = Get-IPAddressWiFi
-        MACAddressWiFi = Get-MACAddressWiFi
-        CPU = Get-CPU
-        Memory = Get-Memory
-        Drive = Get-Drive
+        Hostname = $hostname
+        Brand = $brand
+        Model = $model
+        IPAddressEthernet = $ipAddressEthernet
+        MACAddressEthernet = $macAddressEthernet
+        IPAddressWiFi = $ipAddressWiFi
+        MACAddressWiFi = $macAddressWiFi
+        CPU = $cpu
+        Memory = $memory
+        Drive = $drive
         Location = ""
-        OperatingSystem = Get-OperatingSystem
-        Notes = Get-Notes
+        OperatingSystem = $os
+        Notes = $notes
     }
-    
+
+    # Complete the progress bar
+    Write-Progress -Activity "Collecting Computer Information" -Status "100% Complete" -PercentComplete 100 -Completed
+
     # Convert the object to JSON
     $json = $pcInfo | ConvertTo-Json
-    
+
     # Output the JSON
     $data = $json | ConvertFrom-Json
-    
+
     $data | Format-List -Property Hostname, Brand, Model, IPAddressEthernet, MACAddressEthernet, IPAddressWiFi, MACAddressWiFi, CPU, Memory, Drive, Location, OperatingSystem, Notes
-    
-    
+
     # Prompt the user for confirmation
-    $response = Read-Host "Do you want to sent this data to Hudu? (yes/no)"
-    
+    $response = Read-Host "Do you want to send this data to Hudu? (yes/no)"
+
     if ($response -eq "yes") {
+        # Prompt the user for input and store the values in variables
+        $apiKey = Read-Host "Please enter your API Key"
+        $clientURL = Read-Host "Please enter the Client URL"
+
+        # Check if API Key is empty
+        if ([string]::IsNullOrWhiteSpace($apiKey)) {
+            Write-Error "API Key cannot be empty. Please provide a valid API Key."
+            return
+        }
+
+        # Check if Client URL is empty
+        if ([string]::IsNullOrWhiteSpace($clientURL)) {
+            Write-Error "Client URL cannot be empty. Please provide a valid Client URL."
+            return
+        }
+
+        # Validate Client URL format
+        if ($clientURL -notmatch '^https?://') {
+            Write-Error "Invalid Client URL format. Please provide a URL starting with http:// or https://."
+            return
+        }
+
+        $HuduURL = $clientURL -replace '/c/.*', '' 
+        $URLslug = $clientURL -replace '.*c/', ''
+
+        $baseURL = "$HuduURL/api/v1"
+
         Send-PCInfoToHudu
     } else {
         Write-Host "Operation canceled."
     }
 }
+
+Send-ComputerInfoToHudu
+
 
 function Set-Hostname {
     # Prompt the user for the new hostname
@@ -541,7 +600,6 @@ function Show-MainMenu {
             Show-ConfigMenu
         }
         3 {
-            Write-host "Debug message"
             Send-ComputerInfoToHudu
         }
         default {
