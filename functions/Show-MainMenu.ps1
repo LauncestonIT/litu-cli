@@ -1,5 +1,5 @@
 function Show-MainMenu {
-    Clear-Host
+    Clear
     Show-Logo
     Write-Host "--------------------------------------------"
     Write-Host "---------------MAIN MENU--------------------"
