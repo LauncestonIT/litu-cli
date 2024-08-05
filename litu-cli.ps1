@@ -125,7 +125,7 @@ function Remove-Backblaze {
     if (Test-Path -Path $Path -PathType Container) {
         Write-Host "Starting uninstall.."
         Start-Process -FilePath $Exe -ArgumentList "-douninstall -nogui" -Wait
-        Stop-Process -Name "bzbui.exe" -Force
+        taskkill.exe /IM bzbui.exe /F
         Remove-Item -Path $Path -Recurse -Force
         Write-Host "Successfully uninstalled, returning to menu.."
         Start-Sleep -Seconds 3
