@@ -7,7 +7,8 @@ function Deploy-CometBackup {
     Write-Host "Starting install of Comet Backup..."
 
     # Get the user input
-    $cometURL = Read-Host "Enter your Comet Backup server URL"
+    Write-Host "Enter your Comet Backup server URL"
+    $cometURL = Read-Host 
 
     if (-not $cometURL) {
         throw "No URL provided."

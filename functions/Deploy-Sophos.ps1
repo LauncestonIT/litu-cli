@@ -6,7 +6,8 @@ function Deploy-Sophos {
     #>
 
     # Get the user input
-    $URL = Read-Host "Enter Sophos exe URL"
+    Write-Host "Enter Sophos exe URL"
+    $URL = Read-Host 
 
     if (-not $URL) {
         throw "No URL provided."
