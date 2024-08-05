@@ -174,6 +174,27 @@ function Remove-Backblaze {
     }
 }
 
+function Remove-UrBackup {
+    Clear-Host
+
+    $UrBackup = "C:\Program Files\UrBackup"
+    $Exe = "C:\Program Files\UrBackup\Uninstall.exe"
+
+    Write-Host "Checking if UrBackup is installed.."
+    if (Test-Path -Path $UrBackup -PathType Container) {
+        Write-Host "Starting uninstall.."
+        Start-Process -FilePath $Exe -ArgumentList "/S" -Wait
+        
+        Write-Host "Successfully uninstalled, returning to menu.."
+        Start-Sleep -Seconds 3
+        Show-MainMenu
+    } else {
+        Write-Host "Backblaze isn't installed, returning to main menu.."
+        Start-Sleep -Seconds 3
+        Show-MainMenu
+    }
+}
+
 function Send-ComputerInfoToHudu {
     # Display a progress bar while collecting computer information
     $progressPercentage = 0
@@ -652,7 +673,7 @@ function Show-MainMenu {
     Write-Host "1) Install"
     Write-Host "2) Config"
     Write-Host "3) Audit"
-    Write-Host "4) Remove Backblaze"
+    Write-Host "4) Maintenance"
     Write-Host "Enter a number (1-4):"
     
     $choice = Read-Host
@@ -668,10 +689,37 @@ function Show-MainMenu {
             Send-ComputerInfoToHudu
         }
         4 {
-            Remove-Backblaze
+            Show-MaintenanceMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 1 and 4."
+            Show-Menu
+        }
+    }
+}
+
+function Show-MaintenanceMenu {
+    Clear-Host
+    Write-Host "Please select an option:"
+    Write-Host "0) Return to Main Menu"
+    Write-Host "1) Remove Backblaze"
+    Write-Host "2) Remove UrBackup"
+    Write-Host "Enter a number (0-2):"
+    
+    $choice = Read-Host
+    
+    switch ($choice) {
+        0 {
+            Show-MainMenu
+        }
+        1 {
+            Remove-Backblaze
+        }
+        2 {
+            Remove-UrBackup
+        }
+        default {
+            Write-Host "Invalid selection. Please enter a number between 1 and 2."
             Show-Menu
         }
     }
