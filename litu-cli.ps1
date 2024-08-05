@@ -120,7 +120,7 @@ function Remove-Backblaze {
 
     $BackblazePath = "C:\Program Files (x86)\Backblaze"
     $Exe = "C:\Program Files (x86)\Backblaze\bzdoinstall.exe"
-    $AppName = "bzbui"
+    $AppName = "Backblaze"
 
     Write-Host "Checking if Backblaze is installed.."
     if (Test-Path -Path $BackblazePath -PathType Container) {
