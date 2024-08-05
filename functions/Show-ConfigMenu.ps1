@@ -1,5 +1,9 @@
 function Show-ConfigMenu {
     Clear-Host
+    Show-Logo
+    Write-Host "--------------------------------------------"
+    Write-Host "------------------CONFIG--------------------"
+    Write-Host "--------------------------------------------"
     Write-Host "Please select an option:"
     Write-Host "0) Return to Main Menu"
     Write-Host "1) Change Hostname"

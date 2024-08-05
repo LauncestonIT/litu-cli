@@ -1,6 +1,9 @@
 function Show-MainMenu {
     Clear-Host
     Show-Logo
+    Write-Host "--------------------------------------------"
+    Write-Host "---------------MAIN MENU--------------------"
+    Write-Host "--------------------------------------------"
     Write-Host "Please select an option:"
     Write-Host "1) Install"
     Write-Host "2) Config"

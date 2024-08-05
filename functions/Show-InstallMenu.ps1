@@ -1,5 +1,9 @@
 function Show-InstallMenu {
     Clear-Host
+    Show-Logo
+    Write-Host "--------------------------------------------"
+    Write-Host "-----------------INSTALL--------------------"
+    Write-Host "--------------------------------------------"
     Write-Host "Please select an option:"
     Write-Host "0) Return to Main Menu"
     Write-Host "1) Comet"
