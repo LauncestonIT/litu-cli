@@ -5,7 +5,7 @@ function Show-MainMenu {
     Write-Host "1) Install"
     Write-Host "2) Config"
     Write-Host "3) Audit"
-    Write-Host "4) Remove Backblaze"
+    Write-Host "4) Maintenance"
     Write-Host "Enter a number (1-4):"
     
     $choice = Read-Host
@@ -21,11 +21,11 @@ function Show-MainMenu {
             Send-ComputerInfoToHudu
         }
         4 {
-            Remove-Backblaze
+            Show-MaintenanceMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 1 and 4."
-            Show-Menu
+            Show-MainMenu
         }
     }
 }
