@@ -8,6 +8,7 @@ function Show-MaintenanceMenu {
     Write-Host "0) Return to Main Menu"
     Write-Host "1) Remove Backblaze"
     Write-Host "2) Remove UrBackup"
+    Write-Host "3) List Browser Extensions"
     Write-Host "Enter a number (0-2):"
     
     $choice = Read-Host
@@ -22,9 +23,12 @@ function Show-MaintenanceMenu {
         2 {
             Remove-UrBackup
         }
+        3 {
+            Get-BrowserExtensions
+        }
         default {
             Write-Host "Invalid selection. Please enter a number between 1 and 2."
-            Show-Menu
+            Show-MaintenanceMenu
         }
     }
 }
