@@ -55,13 +55,7 @@ function Deploy-CometBackup {
         # Start the installer with silent install flag
         Write-Host "Silently running installer in lobby mode..."
         Set-Location -Path $extractPath
-        $process = Start-Process -FilePath $installExe -ArgumentList "/S /LOBBY /SHORTCUT=disable /dat=$installDat" -Wait
+        Start-Process -FilePath $installExe -ArgumentList "/S /LOBBY /SHORTCUT=disable /dat=$installDat" -Wait
         Set-Location $env:USERPROFILE
-
-        if ($process.ExitCode -eq 0) {
-            Write-Host "Installation completed successfully."
-        } else {
-            Write-Host "Installation failed with exit code $($process.ExitCode)."
-        }
     }
 }
