@@ -3,7 +3,7 @@ function Remove-UrBackup {
 
     $UrBackup = "C:\Program Files\UrBackup\Uninstall.exe"
 
-    if (Test-Path -Path $UrBackup -PathType Container) {
+    if (Test-Path -Path $UrBackup -PathType leaf) {
         Write-Host "Starting uninstall.."
         Start-Process -FilePath $UrBackup -ArgumentList "/S" -Wait
         
