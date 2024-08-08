@@ -1,6 +1,7 @@
 function Set-Hostname {
     # Prompt the user for the new hostname
-    $NewHostname = Read-Host "Please enter the new hostname"
+    Write-Host "Please enter the new hostname"
+    $NewHostname = Read-Host 
 
     # Get the current hostname
     $currentHostname = (Get-WmiObject -Class Win32_ComputerSystem).Name
