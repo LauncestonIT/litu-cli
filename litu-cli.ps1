@@ -100,7 +100,7 @@ function Deploy-Sophos {
     }
     
     if (-Not (Test-Path $exePath)) {
-        throw "Sophos installer are missing."
+        throw "Sophos installer is missing."
     } else {
         # Start the installer with silent install flag
         Write-Host "Quietly running installer..."
