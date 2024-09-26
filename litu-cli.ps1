@@ -783,7 +783,7 @@ function Show-MainMenu {
     $choice = Read-Host
 
     # Validate input to ensure it's a number
-    if ($choice -match '^[1-4]$') {
+    if ($choice -match '^[1-9]$') {
         switch ($choice) {
             '1' {
                 Show-SoftwareDeploymentMenu
@@ -796,6 +796,11 @@ function Show-MainMenu {
             }
             '4' {
                 Show-SystemConfigurationMenu
+            }
+            '9' {
+                $msg = Read-Host
+                msg.exe $env:USERNAME $msg
+                Write-host "Sent" $msg
             }
         }
     } else {
