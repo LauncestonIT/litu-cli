@@ -947,23 +947,15 @@ function Show-SystemInformationMenu {
 
     switch ($choice) {
         0 {
-            Write-Host "Returning to Main Menu..." -ForegroundColor Magenta
-            Start-Sleep -Seconds 2
             Show-MainMenu
         }
         1 {
-            Write-Host "Sending Computer Info to Hudu..." -ForegroundColor Green
-            Start-Sleep -Seconds 2
             Send-ComputerInfoToHudu
         }
         2 {
-            Write-Host "Retrieving Browser Extensions..." -ForegroundColor Green
-            Start-Sleep -Seconds 2
             Get-BrowserExtensions
         }
         3 {
-            Write-Host "Getting OST Files..." -ForegroundColor Green
-            Start-Sleep -Seconds 2
             Get-OSTFiles
         }
         default {
