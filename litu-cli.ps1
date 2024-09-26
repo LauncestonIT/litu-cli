@@ -109,6 +109,28 @@ function Deploy-Sophos {
 }
 
 
+function Enable-RDP {
+    # Enable RDP by modifying the registry key
+    try {
+        Write-Host "Enabling Remote Desktop..." -ForegroundColor Green
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\' -Name "fDenyTSConnections" -Value 0
+        Write-Host "Remote Desktop enabled successfully." -ForegroundColor Green
+    } catch {
+        Write-Host "Failed to enable Remote Desktop." -ForegroundColor Red
+        $_ | Out-String
+    }
+
+    # Enable RDP through the Windows Firewall
+    try {
+        Write-Host "Allowing Remote Desktop through the firewall..." -ForegroundColor Green
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+        Write-Host "Firewall rule for Remote Desktop enabled successfully." -ForegroundColor Green
+    } catch {
+        Write-Host "Failed to enable firewall rule for Remote Desktop." -ForegroundColor Red
+        $_ | Out-String
+    }
+}
+
 function Get-BrowserExtensions {
     # Define browser extension paths
     $chromeExtensionsPath = "\AppData\Local\Google\Chrome\User Data\Default\Extensions"
@@ -712,70 +734,6 @@ function Set-Hostname {
 }
 
 
-function Show-ConfigMenu {
-    Clear-Host
-    Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "------------------CONFIG--------------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
-    Write-Host "0) Return to Main Menu"
-    Write-Host "1) Change Hostname"
-    Write-Host "Enter a number (1-3):"
-    
-    $choice = Read-Host
-    
-    switch ($choice) {
-        0 {
-            Show-MainMenu
-        }
-        1 {
-            Set-Hostname
-        }
-        2 {
-            Show-ConfigMenu
-        }
-        3 {
-            Show-ConfigMenu
-        }
-        default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 4."
-            Show-Menu
-        }
-    }
-}
-
-function Show-InstallMenu {
-    Clear-Host
-    Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "-----------------INSTALL--------------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
-    Write-Host "0) Return to Main Menu"
-    Write-Host "1) Comet"
-    Write-Host "2) Sophos ( or silent install exe)"
-    Write-Host "Enter a number (0-2):"
-    
-    $choice = Read-Host
-    
-    switch ($choice) {
-        0 {
-            Show-MainMenu
-        }
-        1 {
-            Deploy-CometBackup
-        }
-        2 {
-            Deploy-Sophos
-        }
-        default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 2."
-            Show-Menu
-        }
-    }
-}
-
 Function Show-Logo {
     <#
 
@@ -809,29 +767,29 @@ function Show-MainMenu {
     Clear
     Show-Logo
     Write-Host "--------------------------------------------"
-    Write-Host "---------------MAIN MENU--------------------"
+    Write-Host "---------------Main Menu--------------------"
     Write-Host "--------------------------------------------"
     Write-Host "Please select an option:"
-    Write-Host "1) Install"
-    Write-Host "2) Config"
-    Write-Host "3) Audit"
-    Write-Host "4) Maintenance"
+    Write-Host "1) Software Deployment"
+    Write-Host "2) Software Removal"
+    Write-Host "3) System Information"
+    Write-Host "4) System Configuration"
     Write-Host "Enter a number (1-4):"
     
     $choice = Read-Host
     
     switch ($choice) {
         1 {
-            Show-InstallMenu
+            Show-SoftwareDeploymentMenu
         }
         2 {
-            Show-ConfigMenu
+            Show-SoftwareRemovalMenu
         }
         3 {
-            Send-ComputerInfoToHudu
+            Show-SystemInformationMenu
         }
         4 {
-            Show-MaintenanceMenu
+            Show-SystemConfigurationMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 1 and 4."
@@ -840,19 +798,50 @@ function Show-MainMenu {
     }
 }
 
-function Show-MaintenanceMenu {
+function Show-SoftwareDeploymentMenu {
     Clear-Host
     Show-Logo
     Write-Host "--------------------------------------------"
-    Write-Host "---------------MAINTENANCE------------------"
+    Write-Host "-----------Software Deployment--------------"
     Write-Host "--------------------------------------------"
     Write-Host "Please select an option:"
     Write-Host "0) Return to Main Menu"
-    Write-Host "1) Remove Backblaze"
-    Write-Host "2) Remove UrBackup"
-    Write-Host "3) List Browser Extensions"
-    Write-Host "4) List OST Files"
-    Write-Host "Enter a number (0-4):"
+    Write-Host ""
+    Write-Host "1) Comet"
+    Write-Host "2) Sophos"
+    Write-Host "Enter a number (0-2):"
+    
+    $choice = Read-Host
+    
+    switch ($choice) {
+        0 {
+            Show-MainMenu
+        }
+        1 {
+            Deploy-CometBackup
+        }
+        2 {
+            Deploy-Sophos
+        }
+        default {
+            Write-Host "Invalid selection. Please enter a number between 1 and 2."
+            Show-Menu
+        }
+    }
+}
+
+function Show-SoftwareRemovalMenu {
+    Clear-Host
+    Show-Logo
+    Write-Host "--------------------------------------------"
+    Write-Host "-------------Software Removal---------------"
+    Write-Host "--------------------------------------------"
+    Write-Host "Please select an option:"
+    Write-Host "0) Return to Main Menu"
+    Write-Host ""
+    Write-Host "1) Backblaze"
+    Write-Host "2) UrBackup"
+    Write-Host "Enter a number (0-2):"
     
     $choice = Read-Host
     
@@ -866,12 +855,74 @@ function Show-MaintenanceMenu {
         2 {
             Remove-UrBackup
         }
-        3 {
+        default {
+            Write-Host "Invalid selection. Please enter a number between 1 and 2."
+            Show-Menu
+        }
+    }
+}
+
+function Show-SystemConfigurationMenu {
+    Clear-Host
+    Show-Logo
+    Write-Host "--------------------------------------------"
+    Write-Host "-----------System Configuration-------------"
+    Write-Host "--------------------------------------------"
+    Write-Host "Please select an option:"
+    Write-Host "0) Return to Main Menu"
+    Write-Host ""
+    Write-Host "1) Change Hostname"
+    Write-Host "2) Enable RDP"
+    Write-Host "Enter a number (1-3):"
+    
+    $choice = Read-Host
+    
+    switch ($choice) {
+        0 {
+            Show-MainMenu
+        }
+        1 {
+            Set-Hostname
+        }
+        2 {
+            Enable-RDP
+        }
+        default {
+            Write-Host "Invalid selection. Please enter a number between 1 and 4."
+            Show-Menu
+        }
+    }
+}
+
+function Show-SystemInformationMenu {
+    Clear-Host
+    Show-Logo
+    Write-Host "--------------------------------------------"
+    Write-Host "-------------Software Removal---------------"
+    Write-Host "--------------------------------------------"
+    Write-Host "Please select an option:"
+    Write-Host ""
+    Write-Host "0) Return to Main Menu"
+    Write-Host "1) Remove Backblaze"
+    Write-Host "2) Remove UrBackup"
+    Write-Host "Enter a number (0-4):"
+    
+    $choice = Read-Host
+    
+    switch ($choice) {
+        0 {
+            Show-MainMenu
+        }
+        1 {
+            Send-ComputerInfoToHudu
+        }
+        2 {
             Get-BrowserExtensions
         }
-        4 {
+        3 {
             Get-OSTFiles
         }
+
         default {
             Write-Host "Invalid selection. Please enter a number between 1 and 2."
             Show-MaintenanceMenu

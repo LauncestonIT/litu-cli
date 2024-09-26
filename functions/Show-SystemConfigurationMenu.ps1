@@ -1,12 +1,14 @@
-function Show-ConfigMenu {
+function Show-SystemConfigurationMenu {
     Clear-Host
     Show-Logo
     Write-Host "--------------------------------------------"
-    Write-Host "------------------CONFIG--------------------"
+    Write-Host "-----------System Configuration-------------"
     Write-Host "--------------------------------------------"
     Write-Host "Please select an option:"
     Write-Host "0) Return to Main Menu"
+    Write-Host ""
     Write-Host "1) Change Hostname"
+    Write-Host "2) Enable RDP"
     Write-Host "Enter a number (1-3):"
     
     $choice = Read-Host
@@ -19,10 +21,7 @@ function Show-ConfigMenu {
             Set-Hostname
         }
         2 {
-            Show-ConfigMenu
-        }
-        3 {
-            Show-ConfigMenu
+            Enable-RDP
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 1 and 4."

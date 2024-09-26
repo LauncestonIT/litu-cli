@@ -1,13 +1,14 @@
-function Show-InstallMenu {
+function Show-SoftwareDeploymentMenu {
     Clear-Host
     Show-Logo
     Write-Host "--------------------------------------------"
-    Write-Host "-----------------INSTALL--------------------"
+    Write-Host "-----------Software Deployment--------------"
     Write-Host "--------------------------------------------"
     Write-Host "Please select an option:"
     Write-Host "0) Return to Main Menu"
+    Write-Host ""
     Write-Host "1) Comet"
-    Write-Host "2) Sophos ( or silent install exe)"
+    Write-Host "2) Sophos"
     Write-Host "Enter a number (0-2):"
     
     $choice = Read-Host
