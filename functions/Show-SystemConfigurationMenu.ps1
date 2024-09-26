@@ -1,18 +1,21 @@
 function Show-SystemConfigurationMenu {
     Clear-Host
     Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "-----------System Configuration-------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
-    Write-Host "0) Return to Main Menu"
+    Write-Host "============================================" -ForegroundColor Cyan
+    Write-Host "       *** System Configuration ***         " -ForegroundColor Cyan
+    Write-Host "============================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "1) Change Hostname"
-    Write-Host "2) Enable RDP"
-    Write-Host "Enter a number (1-3):"
-    
+    Write-Host "Please select an option:" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  0) " -NoNewline; Write-Host "Return to Main Menu" -ForegroundColor Green
+    Write-Host "  1) " -NoNewline; Write-Host "Change Hostname" -ForegroundColor Green
+    Write-Host "  2) " -NoNewline; Write-Host "Enable RDP (Remote Desktop Protocol)" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+    Write-Host "Enter a number (0-2):" -ForegroundColor Cyan
+
     $choice = Read-Host
-    
+
     switch ($choice) {
         0 {
             Show-MainMenu
@@ -24,8 +27,9 @@ function Show-SystemConfigurationMenu {
             Enable-RDP
         }
         default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 4."
-            Show-Menu
+            Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
+            Start-Sleep -Seconds 2
+            Show-SystemConfigurationMenu
         }
     }
 }

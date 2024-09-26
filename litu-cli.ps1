@@ -764,55 +764,66 @@ Write-Host "lllllllliiiiiiii         ttttttttttt      uuuuuuuu  uuuu            
 
 
 function Show-MainMenu {
-    Clear
+    Clear-host
     Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "---------------Main Menu--------------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
-    Write-Host "1) Software Deployment"
-    Write-Host "2) Software Removal"
-    Write-Host "3) System Information"
-    Write-Host "4) System Configuration"
-    Write-Host "Enter a number (1-4):"
-    
+    Write-Host "============================================" -ForegroundColor Cyan
+    Write-Host "               *** Main Menu ***            " -ForegroundColor Cyan
+    Write-Host "============================================" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "Please select an option:" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  1) " -NoNewline; Write-Host "Software Deployment" -ForegroundColor Green
+    Write-Host "  2) " -NoNewline; Write-Host "Software Removal" -ForegroundColor Green
+    Write-Host "  3) " -NoNewline; Write-Host "System Information" -ForegroundColor Green
+    Write-Host "  4) " -NoNewline; Write-Host "System Configuration" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+    Write-Host "Enter a number (1-4):" -ForegroundColor Cyan
+
     $choice = Read-Host
-    
-    switch ($choice) {
-        1 {
-            Show-SoftwareDeploymentMenu
+
+    # Validate input to ensure it's a number
+    if ($choice -match '^[1-4]$') {
+        switch ($choice) {
+            '1' {
+                Show-SoftwareDeploymentMenu
+            }
+            '2' {
+                Show-SoftwareRemovalMenu
+            }
+            '3' {
+                Show-SystemInformationMenu
+            }
+            '4' {
+                Show-SystemConfigurationMenu
+            }
         }
-        2 {
-            Show-SoftwareRemovalMenu
-        }
-        3 {
-            Show-SystemInformationMenu
-        }
-        4 {
-            Show-SystemConfigurationMenu
-        }
-        default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 4."
-            Show-MainMenu
-        }
+    } else {
+        Write-Host "Invalid selection. Please enter a number between 1 and 4." -ForegroundColor Red
+        Start-Sleep -Seconds 2
+        Show-MainMenu
     }
 }
+
 
 function Show-SoftwareDeploymentMenu {
     Clear-Host
     Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "-----------Software Deployment--------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
-    Write-Host "0) Return to Main Menu"
+    Write-Host "============================================" -ForegroundColor Cyan
+    Write-Host "         *** Software Deployment ***        " -ForegroundColor Cyan
+    Write-Host "============================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "1) Comet"
-    Write-Host "2) Sophos"
-    Write-Host "Enter a number (0-2):"
-    
+    Write-Host "Please select an option:" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  0) " -NoNewline; Write-Host "Return to Main Menu" -ForegroundColor Green
+    Write-Host "  1) " -NoNewline; Write-Host "Deploy Comet Backup" -ForegroundColor Green
+    Write-Host "  2) " -NoNewline; Write-Host "Deploy Sophos" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+    Write-Host "Enter a number (0-2):" -ForegroundColor Cyan
+
     $choice = Read-Host
-    
+
     switch ($choice) {
         0 {
             Show-MainMenu
@@ -824,27 +835,34 @@ function Show-SoftwareDeploymentMenu {
             Deploy-Sophos
         }
         default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 2."
-            Show-Menu
+            Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
+            Start-Sleep -Seconds 2
+            Show-SoftwareDeploymentMenu
         }
     }
 }
 
+
 function Show-SoftwareRemovalMenu {
     Clear-Host
     Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "-------------Software Removal---------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
-    Write-Host "0) Return to Main Menu"
+    # Adding a title with more formatting
+    Write-Host "============================================" -ForegroundColor Cyan
+    Write-Host "          *** Software Removal ***          " -ForegroundColor Cyan
+    Write-Host "============================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "1) Backblaze"
-    Write-Host "2) UrBackup"
-    Write-Host "Enter a number (0-2):"
-    
+    Write-Host "Please select an option:" -ForegroundColor Yellow
+    Write-Host ""
+    # Display options with numbered choices
+    Write-Host "  0) " -NoNewline; Write-Host "Return to Main Menu" -ForegroundColor Green
+    Write-Host "  1) " -NoNewline; Write-Host "Uninstall Backblaze" -ForegroundColor Green
+    Write-Host "  2) " -NoNewline; Write-Host "Uninstall UrBackup" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+    Write-Host "Enter a number (0-2):" -ForegroundColor Cyan
+
     $choice = Read-Host
-    
+
     switch ($choice) {
         0 {
             Show-MainMenu
@@ -856,27 +874,32 @@ function Show-SoftwareRemovalMenu {
             Remove-UrBackup
         }
         default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 2."
-            Show-Menu
+            Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
+            Start-Sleep -Seconds 2
+            Show-SoftwareRemovalMenu
         }
     }
 }
 
+
 function Show-SystemConfigurationMenu {
     Clear-Host
     Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "-----------System Configuration-------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
-    Write-Host "0) Return to Main Menu"
+    Write-Host "============================================" -ForegroundColor Cyan
+    Write-Host "       *** System Configuration ***         " -ForegroundColor Cyan
+    Write-Host "============================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "1) Change Hostname"
-    Write-Host "2) Enable RDP"
-    Write-Host "Enter a number (1-3):"
-    
+    Write-Host "Please select an option:" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  0) " -NoNewline; Write-Host "Return to Main Menu" -ForegroundColor Green
+    Write-Host "  1) " -NoNewline; Write-Host "Change Hostname" -ForegroundColor Green
+    Write-Host "  2) " -NoNewline; Write-Host "Enable RDP (Remote Desktop Protocol)" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+    Write-Host "Enter a number (0-2):" -ForegroundColor Cyan
+
     $choice = Read-Host
-    
+
     switch ($choice) {
         0 {
             Show-MainMenu
@@ -888,47 +911,64 @@ function Show-SystemConfigurationMenu {
             Enable-RDP
         }
         default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 4."
-            Show-Menu
+            Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
+            Start-Sleep -Seconds 2
+            Show-SystemConfigurationMenu
         }
     }
 }
+
 
 function Show-SystemInformationMenu {
     Clear-Host
     Show-Logo
-    Write-Host "--------------------------------------------"
-    Write-Host "-------------Software Removal---------------"
-    Write-Host "--------------------------------------------"
-    Write-Host "Please select an option:"
+    # Adding a title with more formatting
+    Write-Host "============================================" -ForegroundColor Cyan
+    Write-Host "        *** System Information ***          " -ForegroundColor Cyan
+    Write-Host "============================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "0) Return to Main Menu"
-    Write-Host "1) Remove Backblaze"
-    Write-Host "2) Remove UrBackup"
-    Write-Host "Enter a number (0-4):"
-    
+    Write-Host "Please select an option:" -ForegroundColor Yellow
+    Write-Host ""
+    # Display options with numbered choices
+    Write-Host "  0) " -NoNewline; Write-Host "Return to Main Menu" -ForegroundColor Green
+    Write-Host "  1) " -NoNewline; Write-Host "Send Computer Info to Hudu" -ForegroundColor Green
+    Write-Host "  2) " -NoNewline; Write-Host "Retrieve Installed Browser Extensions" -ForegroundColor Green
+    Write-Host "  3) " -NoNewline; Write-Host "Get OST Files" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+    Write-Host "Enter a number (0-3):" -ForegroundColor Cyan
+
     $choice = Read-Host
-    
+
     switch ($choice) {
         0 {
+            Write-Host "Returning to Main Menu..." -ForegroundColor Magenta
+            Start-Sleep -Seconds 2
             Show-MainMenu
         }
         1 {
+            Write-Host "Sending Computer Info to Hudu..." -ForegroundColor Green
+            Start-Sleep -Seconds 2
             Send-ComputerInfoToHudu
         }
         2 {
+            Write-Host "Retrieving Browser Extensions..." -ForegroundColor Green
+            Start-Sleep -Seconds 2
             Get-BrowserExtensions
         }
         3 {
+            Write-Host "Getting OST Files..." -ForegroundColor Green
+            Start-Sleep -Seconds 2
             Get-OSTFiles
         }
-
         default {
-            Write-Host "Invalid selection. Please enter a number between 1 and 2."
-            Show-MaintenanceMenu
+            Write-Host "Invalid selection. Please enter a number between 0 and 3." -ForegroundColor Red
+            Start-Sleep -Seconds 2
+            Show-SystemInformationMenu
         }
     }
 }
+
 
 
 # Open Main menu
