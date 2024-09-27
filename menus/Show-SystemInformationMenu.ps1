@@ -13,9 +13,10 @@ function Show-SystemInformationMenu {
     Write-Host "  1) " -NoNewline; Write-Host "Send Computer Info to Hudu" -ForegroundColor Green
     Write-Host "  2) " -NoNewline; Write-Host "Retrieve Installed Browser Extensions" -ForegroundColor Green
     Write-Host "  3) " -NoNewline; Write-Host "Get OST Files" -ForegroundColor Green
+    Write-Host "  4) " -NoNewline; Write-Host "Get Local User/s Last Logon Time" -ForegroundColor Green
     Write-Host ""
     Write-Host "--------------------------------------------" -ForegroundColor DarkGray
-    Write-Host "Enter a number (0-3):" -ForegroundColor Cyan
+    Write-Host "Enter a number (0-4):" -ForegroundColor Cyan
 
     $choice = Read-Host
 
@@ -31,6 +32,9 @@ function Show-SystemInformationMenu {
         }
         3 {
             Get-OSTFiles
+        }
+        4 {
+            Get-LocalUserLastLogon
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 0 and 3." -ForegroundColor Red
