@@ -20,13 +20,26 @@ function Show-SoftwareRemovalMenu {
 
     switch ($choice) {
         0 {
+            Write-Host "Returning to Main Menu..." -ForegroundColor Gray
             Show-MainMenu
         }
         1 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Remove-Backblaze
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Removal Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareRemovalMenu
         }
         2 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Remove-UrBackup
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Removal Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareRemovalMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red

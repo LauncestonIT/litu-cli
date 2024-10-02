@@ -31,13 +31,26 @@ function Show-SoftwareDeploymentMenu {
 
     switch ($choice) {
         0 {
+            Write-Host "Returning to Main Menu..." -ForegroundColor Gray
             Show-MainMenu
         }
         1 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Deploy-CometBackup
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Deployment Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareDeploymentMenu
         }
         2 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Deploy-Sophos
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Deployment Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareDeploymentMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
@@ -70,13 +83,26 @@ function Show-SoftwareRemovalMenu {
 
     switch ($choice) {
         0 {
+            Write-Host "Returning to Main Menu..." -ForegroundColor Gray
             Show-MainMenu
         }
         1 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Remove-Backblaze
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Removal Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareRemovalMenu
         }
         2 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Remove-UrBackup
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Removal Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareRemovalMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
@@ -107,13 +133,26 @@ function Show-SystemConfigurationMenu {
 
     switch ($choice) {
         0 {
+            Write-Host "Returning to Main Menu..." -ForegroundColor Gray
             Show-MainMenu
         }
         1 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Set-Hostname
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Configuration Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemConfigurationMenu
         }
         2 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Enable-RDP
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Configuration Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemConfigurationMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
@@ -125,7 +164,6 @@ function Show-SystemConfigurationMenu {
 
 
 function Show-SystemInformationMenu {
-    Clear-Host
     Show-Logo
     # Adding a title with more formatting
     Write-Host "============================================" -ForegroundColor Cyan
@@ -139,10 +177,14 @@ function Show-SystemInformationMenu {
     Write-Host "  1) " -NoNewline; Write-Host "Send Computer Info to Hudu" -ForegroundColor Green
     Write-Host "  2) " -NoNewline; Write-Host "Retrieve Installed Browser Extensions" -ForegroundColor Green
     Write-Host "  3) " -NoNewline; Write-Host "Get OST Files" -ForegroundColor Green
-    Write-Host "  4) " -NoNewline; Write-Host "Get Local User/s Last Logon Time" -ForegroundColor Green
+    Write-Host "  4) " -NoNewline; Write-Host "Get Classic Outlook Signed In Accounts" -ForegroundColor Green
+    Write-Host "  5) " -NoNewline; Write-Host "Get New Outlook Signed In Accounts" -ForegroundColor Green
+    Write-Host "  6) " -NoNewline; Write-Host "Get Local User/s Last Logon Time" -ForegroundColor Green
+    Write-Host "  7) " -NoNewline; Write-Host "Get System Uptime" -ForegroundColor Green
+    Write-Host "  8) " -NoNewline; Write-Host "Get Windows Version" -ForegroundColor Green
     Write-Host ""
     Write-Host "--------------------------------------------" -ForegroundColor DarkGray
-    Write-Host "Enter a number (0-4):" -ForegroundColor Cyan
+    Write-Host "Enter a number (0-8):" -ForegroundColor Cyan
 
     $choice = Read-Host
 
@@ -151,19 +193,80 @@ function Show-SystemInformationMenu {
             Show-MainMenu
         }
         1 {
-            Send-ComputerInfoToHudu
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Send-ComputerInfoToHudu 
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
         }
         2 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Get-BrowserExtensions
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
         }
         3 {
-            Get-OSTFiles
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Get-OSTFiles 
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
         }
         4 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Get-ClassicSignedInAccounts 
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
+        }
+        5 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Get-OutlookSignedInAccounts
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
+        }
+        6 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Get-LocalUserLastLogon
+            Get-LocalUserLastLogon
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
+        }
+        7 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Get-SystemUptime
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
+        }
+        8 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Get-WindowsVersion
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Information Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemInformationMenu
         }
         default {
-            Write-Host "Invalid selection. Please enter a number between 0 and 3." -ForegroundColor Red
+            Write-Host "Invalid selection. Please enter a number between 0 and 8." -ForegroundColor Red
             Start-Sleep -Seconds 2
             Show-SystemInformationMenu
         }
@@ -380,6 +483,97 @@ function Get-BrowserExtensions {
     }
 }
 
+function Get-ClassicSignedInAccounts {
+    # Define the users directory
+    $UsersFolder = "C:\Users"
+
+    # Get the list of user folders, excluding common system profiles
+    $UserFolders = Get-ChildItem $UsersFolder | Where-Object {
+        $_.PSIsContainer -and
+        $_.Name -notin @('All Users', 'Default', 'Default User', 'Public', 'DefaultAppPool')
+    }
+
+    if ($UserFolders.Count -eq 0) {
+        return
+    }
+
+    # Display the menu of users
+    for ($i = 0; $i -lt $UserFolders.Count; $i++) {
+        Write-Host "$($i + 1). $($UserFolders[$i].Name)"
+    }
+
+    # Prompt the user for a selection
+    $selection = Read-Host "Select user number"
+
+    # Validate the selection
+    if ($selection -match '^\d+$' -and
+        $selection -ge 1 -and
+        $selection -le $UserFolders.Count) {
+
+        # Get the selected user
+        $SelectedUser = $UserFolders[$selection - 1]
+
+        # Define the path to the user's AppData\Local\Microsoft\Outlook folder
+        $OutlookFolder = Join-Path $SelectedUser.FullName "AppData\Local\Microsoft\Outlook"
+
+        # Check if the Outlook folder exists
+        if (Test-Path $OutlookFolder) {
+
+            # Search for OST files in the user's Outlook folder
+            $OSTFiles = Get-ChildItem -Path $OutlookFolder -Filter *.ost -ErrorAction SilentlyContinue
+
+            # Display the OST files in a formatted table
+            if ($OSTFiles) {
+                $OutputTable = @()
+
+                foreach ($OSTFile in $OSTFiles) {
+                    # Handle both formats: email@domain.com.ost and email@domain.com - Profile.ost
+                    if ($OSTFile.Name -match '^([\w\.-]+@[\w\.-]+)\.ost$') {
+                        $Email = $matches[1]
+                        $Profile = "Default" # Default profile name
+                    }
+                    elseif ($OSTFile.Name -match '^([\w\.-]+@[\w\.-]+)( - )(.*)\.ost$') {
+                        $Email = $matches[1]
+                        $Profile = $matches[3]
+                    }
+                    else {
+                        continue
+                    }
+
+                    # Create an object with the extracted information
+                    $OutputTable += [pscustomobject]@{
+                        'Profile Name'  = $Profile
+                        'Email Address' = $Email
+                    }
+                }
+
+                # Group the table by Profile Name, then sort by Email Address within each group
+                $GroupedTable = $OutputTable | Sort-Object -Property 'Profile Name', 'Email Address'
+
+                # Display each profile with its associated emails
+                $CurrentProfile = ""
+                foreach ($Row in $GroupedTable) {
+                    if ($Row.'Profile Name' -ne $CurrentProfile) {
+                        # Print a blank line between profile sections
+                        if ($CurrentProfile -ne "") {
+                            Write-Host "_____________"
+                        }
+
+                        # Display the profile name header
+                        $CurrentProfile = $Row.'Profile Name'
+                        Write-Host ""
+                        Write-Host "Profile: $CurrentProfile" -ForegroundColor Yellow
+                        Write-Host "-------------"
+                    }
+                    # Display each email under the corresponding profile
+                    Write-Host "$($Row.'Email Address')" -ForegroundColor Cyan
+                }
+            }
+        }
+    }
+}
+
+
 function Get-LocalUserLastLogon {
     # Get all local user profiles
     $userProfiles = Get-WmiObject -Class Win32_NetworkLoginProfile | Where-Object { $_.Name -ne "SYSTEM" -and $_.Name -ne "LOCAL SERVICE" -and $_.Name -ne "NETWORK SERVICE" }
@@ -400,6 +594,75 @@ function Get-LocalUserLastLogon {
         }
     }
 }
+
+function Get-OutlookSignedInAccounts {
+    param (
+        [string]$UsersFolder = "C:\Users"
+    )
+
+    # Get the list of user folders, excluding common system profiles
+    $UserFolders = Get-ChildItem $UsersFolder | Where-Object {
+        $_.PSIsContainer -and
+        $_.Name -notin @('All Users', 'Default', 'Default User', 'Public', 'DefaultAppPool')
+    }
+
+    # Display the menu of users
+    Write-Output "Available user profiles:"
+    for ($i = 0; $i -lt $UserFolders.Count; $i++) {
+        Write-Output "$($i + 1). $($UserFolders[$i].Name)"
+    }
+
+    # Prompt the user for a selection
+    $selection = Read-Host "Select user number"
+
+    # Validate the selection
+    if (-not [int]::TryParse($selection, [ref]$null) -or $selection -lt 1 -or $selection -gt $UserFolders.Count) {
+        Write-Error "Invalid selection. Please select a number between 1 and $($UserFolders.Count)."
+        return
+    }
+
+    # Get the selected user profile folder name
+    $selectedUserProfile = $UserFolders[$selection - 1].Name
+    $JsonPath = "$UsersFolder\$selectedUserProfile\AppData\Local\Microsoft\Olk\UserSettings.json"
+
+    # Check if the JSON file exists
+    if (-not (Test-Path $JsonPath)) {
+        Write-Error "UserSettings.json file not found for the selected user: $selectedUserProfile."
+        return
+    }
+
+    # Load the JSON file
+    try {
+        $jsonData = Get-Content -Path $JsonPath -Raw | ConvertFrom-Json
+    }
+    catch {
+        Write-Error "Failed to read or parse the JSON file: $_"
+        return
+    }
+
+    # Check if the necessary properties are available in the JSON structure
+    if (-not $jsonData.Identities -or -not $jsonData.Identities.IdentityMap) {
+        Write-Error "IdentityMap not found in the UserSettings.json file. Verify the JSON structure."
+        return
+    }
+
+    # Use property access to get the IdentityMap as a hashtable
+    $identityMap = @{}
+    foreach ($property in $jsonData.Identities.IdentityMap.PSObject.Properties) {
+        $identityMap[$property.Name] = $property.Value
+    }
+
+    # Convert to a custom object for table formatting
+    $signedInAccounts = $identityMap.Keys | ForEach-Object {
+        [PSCustomObject]@{
+            "Email Address" = $_
+        }
+    }
+
+    # Display in table format
+    $signedInAccounts | Format-Table -AutoSize
+}
+
 
 function Get-OSTFiles {
     # Define the users directory
@@ -449,6 +712,35 @@ function Get-OSTFiles {
     }
 }
 
+
+function Get-SystemUptime {
+    # Get the last boot up time
+    $lastBootTime = (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime
+
+    # Calculate uptime
+    $uptime = (Get-Date) - $lastBootTime
+
+    # Format the output in a more human-readable way
+    $formattedUptime = "{0} days, {1} hours, {2} minutes, {3} seconds" -f $uptime.Days, $uptime.Hours, $uptime.Minutes, $uptime.Seconds
+
+    # Display the formatted uptime
+    Write-Output "Uptime: $formattedUptime"
+}
+
+function Get-WindowsVersion {
+    # Get Windows version details from the registry and operating system
+    $windowsVersion = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").ReleaseID
+    $os = Get-CimInstance -ClassName Win32_OperatingSystem
+    $osBuild = $os.BuildNumber
+    $osVersion = $os.Version
+    $windowsEdition = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").DisplayVersion
+
+    # Display the version information in a human-readable format
+    Write-Output "Windows Version: $windowsVersion"
+    Write-Output "OS Build: $osBuild"
+    Write-Output "OS Version: $osVersion"
+    Write-Output "Display Version: $windowsEdition"
+}
 
 function Remove-Backblaze {
     Clear-Host

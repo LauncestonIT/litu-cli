@@ -18,13 +18,26 @@ function Show-SoftwareDeploymentMenu {
 
     switch ($choice) {
         0 {
+            Write-Host "Returning to Main Menu..." -ForegroundColor Gray
             Show-MainMenu
         }
         1 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Deploy-CometBackup
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Deployment Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareDeploymentMenu
         }
         2 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Deploy-Sophos
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to Software Deployment Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SoftwareDeploymentMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red

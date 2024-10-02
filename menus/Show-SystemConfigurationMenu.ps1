@@ -18,13 +18,26 @@ function Show-SystemConfigurationMenu {
 
     switch ($choice) {
         0 {
+            Write-Host "Returning to Main Menu..." -ForegroundColor Gray
             Show-MainMenu
         }
         1 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Set-Hostname
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Configuration Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemConfigurationMenu
         }
         2 {
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
             Enable-RDP
+            Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+            Write-Host ""
+            Write-Host "Press Enter to return to System Configuration Menu" -ForegroundColor Gray
+            Read-Host
+            Show-SystemConfigurationMenu
         }
         default {
             Write-Host "Invalid selection. Please enter a number between 0 and 2." -ForegroundColor Red
